@@ -5,8 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paul Vornière | Manager Marketing Digital & Communication</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@300;400;600;700&display=swap');
+        html {
+            scroll-behavior: smooth;
+        }
 
         :root {
             --bg: #050505;
@@ -125,7 +132,20 @@
         h3,
         h4 {
             margin: 0;
-            font-weight: normal;
+            font-weight: 400;
+            /* Most are Anton or Playfair */
+        }
+
+        h1,
+        h2,
+        h3,
+        .section-title {
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+        }
+
+        .job-meta h4 {
+            font-family: var(--font-serif);
         }
 
         a {
@@ -204,6 +224,11 @@
             clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
             color: transparent;
             -webkit-text-stroke: 2px rgba(226, 223, 216, 0.4);
+        }
+
+        .split-layer.top,
+        .split-layer.bottom {
+            transition: transform 0.1s ease-out;
         }
 
         .split-ghost {
@@ -365,8 +390,15 @@
         }
 
         @keyframes photoBorderGlow {
-            0%   { opacity: 0.6; filter: blur(2px); }
-            100% { opacity: 1;   filter: blur(6px); }
+            0% {
+                opacity: 0.6;
+                filter: blur(2px);
+            }
+
+            100% {
+                opacity: 1;
+                filter: blur(6px);
+            }
         }
 
         .about-photo-wrap img {
@@ -389,8 +421,15 @@
         }
 
         @keyframes photoFloat {
-            0%, 100% { transform: translateY(0); }
-            50%       { transform: translateY(-8px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
         }
 
         .contact-details {
@@ -446,7 +485,7 @@
             font-family: var(--font-serif);
             font-style: italic;
             font-size: clamp(3rem, 10vw, 8rem);
-            opacity: 0.05;
+            opacity: 0.15;
             pointer-events: none;
             text-align: center;
             line-height: 1;
@@ -604,42 +643,159 @@
             font-size: 1.5rem;
         }
 
-        /* SKILLS MARQUEES */
-        .skills-marquee-wrap {
-            width: 110vw;
-            margin-left: -5vw;
-            background: var(--accent);
-            color: var(--bg);
-            padding: 1.5rem 0;
-            transform: rotate(-3deg) scale(1.05);
-            overflow: hidden;
-            position: relative;
-            z-index: 20;
-            margin-top: 2vh;
+        /* STICKY NAV */
+        .sticky-nav {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: rgba(5, 5, 5, 0.5);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(226, 223, 216, 0.1);
+            border-radius: 50px;
+            padding: 0.8rem 2rem;
+            display: flex;
+            gap: 2rem;
+            opacity: 0;
+            animation: fadeIn 0.8s forwards 0.5s;
         }
 
-        .skills-marquee-wrap.two {
-            background: var(--accent2);
-            transform: rotate(2deg) scale(1.05);
-            margin-top: -2rem;
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
         }
 
-        .skills-marquee-wrap .core-marquee span {
+        .nav-link {
             font-family: var(--font-heading);
-            font-style: normal;
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(226, 223, 216, 0.4);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            cursor: pointer;
         }
 
-        /* FORMATION TIMELINE */
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--fg);
+        }
+
+        @media (max-width: 768px) {
+            .sticky-nav {
+                top: 1rem;
+                padding: 0.6rem 1.5rem;
+                gap: 1.2rem;
+                width: 90%;
+                justify-content: center;
+            }
+
+            .nav-link {
+                font-size: 0.7rem;
+                letter-spacing: 1px;
+            }
+        }
+
+        /* TOOLS CONSTELLATION MAP */
+        .tools-map-container {
+            position: relative;
+            width: 100%;
+            height: 70vh;
+            background: radial-gradient(circle at center, #0a0a0a 0%, #050505 100%);
+            border: 1px solid rgba(226, 223, 216, 0.05);
+            border-radius: 30px;
+            overflow: hidden;
+            margin-top: 4vh;
+            cursor: crosshair;
+        }
+
+        #tools-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .tool-node {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: rgba(226, 223, 216, 0.03);
+            border: 1px solid rgba(226, 223, 216, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: 10;
+            transform-origin: center;
+            animation: pulse-node 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse-node {
+            0%, 100% { border-color: rgba(226, 223, 216, 0.1); box-shadow: 0 0 0px transparent; }
+            50% { border-color: rgba(226, 223, 216, 0.2); box-shadow: 0 0 15px rgba(226, 223, 216, 0.05); }
+        }
+
+        .tool-node:hover {
+            background: rgba(0, 240, 255, 0.1);
+            border-color: var(--accent2);
+            box-shadow: 0 0 40px rgba(0, 240, 255, 0.4);
+            scale: 1.4;
+            animation: none;
+        }
+
+        .tool-node img {
+            width: 48px;
+            height: 48px;
+            object-fit: contain;
+            filter: brightness(2) contrast(1.2);
+            /* Enhance white logos */
+            transition: filter 0.3s ease;
+        }
+
+        .tool-node:hover img {
+            filter: brightness(1) contrast(1);
+        }
+
+        .tool-label-bubble {
+            position: absolute;
+            bottom: -45px;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: var(--fg);
+            color: var(--bg);
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .tool-node:hover .tool-label-bubble {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* FORMATION TIMELINE (MOBILE FIRST) */
         .formation {
             margin-top: 6vh;
         }
 
         .timeline {
             border-left: 2px solid rgba(226, 223, 216, 0.2);
-            padding-left: 4rem;
+            padding-left: 3rem;
             position: relative;
             max-width: 800px;
+            margin: 0 auto;
         }
 
         .timeline-item {
@@ -650,7 +806,7 @@
         .timeline-item::before {
             content: '';
             position: absolute;
-            left: -4.5rem;
+            left: -3.5rem;
             top: 0.5rem;
             width: 1rem;
             height: 1rem;
@@ -658,6 +814,7 @@
             border: 2px solid var(--accent);
             border-radius: 50%;
             transition: background 0.3s, box-shadow 0.3s, transform 0.3s;
+            z-index: 10;
         }
 
         .timeline-item:hover::before {
@@ -671,15 +828,92 @@
             font-size: clamp(1.5rem, 3vw, 2.5rem);
             letter-spacing: 1px;
             text-transform: uppercase;
+            line-height: 1.2;
+            margin-top: 0.5rem;
         }
 
         .timeline-item p {
             font-family: var(--font-serif);
             font-style: italic;
-            font-size: 1.2rem;
-            color: var(--text-secondary);
+            font-size: 1.1rem;
             opacity: 0.7;
             margin-top: 0.5rem;
+        }
+
+        /* PATH LAYOUT (DESKTOP) */
+        @media (min-width: 1025px) {
+            .timeline {
+                border-left: none;
+                padding-left: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                max-width: 100%;
+            }
+
+            .timeline::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 50%;
+                width: 2px;
+                background: linear-gradient(to bottom, var(--accent), var(--accent2), var(--accent));
+                transform: translateX(-50%);
+                opacity: 0.2;
+            }
+
+            .timeline-item {
+                width: 42%;
+                margin-bottom: 4rem;
+                padding: 2.5rem;
+                background: rgba(226, 223, 216, 0.03);
+                border: 1px solid rgba(226, 223, 216, 0.1);
+                border-radius: 24px;
+                text-align: left;
+            }
+
+            .timeline-item:nth-child(odd) {
+                align-self: flex-start;
+                margin-right: 50%;
+                text-align: right;
+            }
+
+            .timeline-item:nth-child(even) {
+                align-self: flex-end;
+                margin-left: 50%;
+            }
+
+            .timeline-item::before {
+                left: auto;
+                right: -4.5rem;
+                top: 2.5rem;
+                transform: none;
+            }
+
+            .timeline-item:nth-child(even)::before {
+                right: auto;
+                left: -4.5rem;
+            }
+
+            /* Connection Line */
+            .timeline-item::after {
+                content: '';
+                position: absolute;
+                top: 3rem;
+                width: 3.5rem;
+                height: 1px;
+                background: var(--accent);
+                opacity: 0.3;
+            }
+
+            .timeline-item:nth-child(odd)::after {
+                right: -3.5rem;
+            }
+
+            .timeline-item:nth-child(even)::after {
+                left: -3.5rem;
+            }
         }
 
         /* REVEAL UTILITIES */
@@ -744,6 +978,22 @@
             .job-card {
                 position: relative;
                 top: 0 !important;
+            }
+
+            /* CREATIVE SECTIONS MOBILE */
+            .tools-map-container {
+                height: 50vh;
+                border-radius: 20px;
+            }
+
+            .tool-node {
+                width: 60px;
+                height: 60px;
+            }
+
+            .tool-node img {
+                width: 32px;
+                height: 32px;
             }
         }
 
@@ -843,6 +1093,14 @@
 
 <body>
 
+    <nav class="sticky-nav">
+        <a href="#about" class="nav-link">À propos</a>
+        <a href="#traits" class="nav-link">Skills</a>
+        <a href="#tools" class="nav-link">Outils</a>
+        <a href="#experience" class="nav-link">Expériences</a>
+        <a href="#formation" class="nav-link">Formation</a>
+    </nav>
+
     <div class="cursor-dot"></div>
     <div class="cursor-outline">
         <div class="cursor-halo"></div>
@@ -850,7 +1108,7 @@
     <div class="noise-overlay"></div>
 
     <!-- HERO SECTION -->
-    <section class="hero">
+    <section class="hero" id="hero">
         <div class="split-container" id="hero-split">
             <div class="split-ghost">PAUL<br>VORNIERE</div>
             <div class="split-layer top">PAUL<br>VORNIERE</div>
@@ -883,7 +1141,7 @@
     </section>
 
     <!-- ABOUT SECTION -->
-    <div class="container">
+    <div class="container" id="about">
         <section class="about reveal-up">
             <div class="about-photo-wrap">
                 <img src="paul.jpg" alt="Paul Vornière" />
@@ -891,7 +1149,8 @@
             <div class="about-text">
                 Je m’appelle <span class="highlight">Paul Vornière</span>, j’ai 24 ans et je souhaite mettre mes
                 compétences en <span class="highlight">marketing digital</span>, <span
-                    class="highlight">communication</span> et <span class="highlight">analyse </span> au service d’une entreprise afin de
+                    class="highlight">communication</span> et <span class="highlight">analyse </span> au service d’une
+                entreprise afin de
                 contribuer activement à son <span class="highlight">développement</span> et à sa <span
                     class="highlight">performance</span>. <br><br>
                 Le <span class="highlight">basketball</span> m'a enseigné la cohésion et le dépassement. Les <span
@@ -928,13 +1187,13 @@
     </div>
 
     <!-- TRAITS PHYSICS -->
-    <div class="traits-section" id="traits-area">
+    <div class="traits-section" id="traits">
         <div class="traits-overlay">Soft Skills</div>
         <!-- Particles populated by JS -->
     </div>
 
     <!-- EXPERIENCES -->
-    <div class="container">
+    <div class="container" id="experience">
         <section class="experiences">
             <h2 class="section-title reveal-up">Expériences</h2>
 
@@ -1025,64 +1284,46 @@
         </section>
     </div>
 
-    <!-- SKILLS MARQUEES -->
-    <div class="skills-marquee-wrap">
-        <div class="core-marquee" style="animation-duration: 25s;">
-            <span>ADOBE SUITE (ILLUSTRATOR, PHOTOSHOP, INDESIGN)</span>
-            <span>•</span>
-            <span>EXCEL</span>
-            <span>•</span>
-            <span>HUBSPOT</span>
-            <span>•</span>
-            <span>WORDPRESS</span>
-            <span>•</span>
-            <span>HTML/CSS</span>
-            <span>•</span>
-        </div>
-    </div>
-    <div class="skills-marquee-wrap two">
-        <div class="core-marquee" style="animation-duration: 22s; animation-direction: reverse;">
-            <span>SEO</span>
-            <span>•</span>
-            <span>GOOGLE ANALYTICS</span>
-            <span>•</span>
-            <span>RÉDACTION WEB</span>
-            <span>•</span>
-            <span>RÉSEAUX SOCIAUX</span>
-            <span>•</span>
-            <span>VIDÉO ET MONTAGE</span>
-            <span>•</span>
-        </div>
+    <!-- TOOLS SECTION REDESIGN -->
+    <div class="container" id="tools">
+        <section class="tools reveal-up">
+            <h2 class="section-title">Outils & Savoir-faire</h2>
+            <div class="tools-map-container" id="tools-map">
+                <canvas id="tools-canvas"></canvas>
+                <!-- Nodes populated by JS -->
+            </div>
+        </section>
     </div>
 
+
     <!-- FORMATION -->
-    <div class="container">
+    <div class="container" id="formation">
         <section class="formation reveal-up">
             <h2 class="section-title">Formation</h2>
             <div class="timeline">
                 <div class="timeline-item reveal-up">
-                    <h3>Mastère Manager Marketing Digital & Communication</h3>
                     <div class="date">2024–2026</div>
+                    <h3>Mastère Manager Marketing Digital & Communication</h3>
                     <p>Obtenu</p>
                 </div>
                 <div class="timeline-item reveal-up">
-                    <h3>Licence E-Commerce & Marketing Numérique</h3>
                     <div class="date">2023–2024</div>
+                    <h3>Licence E-Commerce & Marketing Numérique</h3>
                     <p>Obtenue</p>
                 </div>
                 <div class="timeline-item reveal-up">
-                    <h3>Licence Générale Cybersécurité</h3>
                     <div class="date">2022–2023</div>
+                    <h3>Licence Générale Cybersécurité</h3>
                     <p>Obtenue</p>
                 </div>
                 <div class="timeline-item reveal-up">
-                    <h3>BTS SIO</h3>
                     <div class="date">2020–2022</div>
+                    <h3>BTS SIO</h3>
                     <p>Option SISR (Services Informatiques aux Organisations)</p>
                 </div>
                 <div class="timeline-item reveal-up">
-                    <h3>Baccalauréat STMG</h3>
                     <div class="date">2018–2019</div>
+                    <h3>Baccalauréat STMG</h3>
                     <p>Option SIG</p>
                 </div>
             </div>
@@ -1146,13 +1387,28 @@
                 });
 
                 function animateSplit() {
-                    currentSplit += (targetSplit - currentSplit) * 0.08;
+                    const scrollY = window.scrollY;
+                    const heroHeight = window.innerHeight;
+                    const scrollProgress = Math.min(scrollY / (heroHeight * 0.8), 1);
+
+                    // Base splitting from scroll
+                    const scrollSplit = scrollProgress * 150;
+
+                    // Combine with mouse interaction if desired, but prioritize scroll as per request
+                    // We'll use targetSplit from mouse but weigh it down or only use it when scroll is near 0
+                    const combinedSplit = scrollSplit + (targetSplit * (1 - scrollProgress * 0.8));
+
+                    currentSplit += (combinedSplit - currentSplit) * 0.1;
                     layerTop.style.transform = `translateY(${-currentSplit}px)`;
                     layerBottom.style.transform = `translateY(${currentSplit}px)`;
                     coreReveal.style.transform = `translate(-50%, -50%) scaleY(${Math.min(currentSplit / 50, 1)})`;
                     requestAnimationFrame(animateSplit);
                 }
                 animateSplit();
+
+                window.addEventListener('scroll', () => {
+                    // No need to set targetSplit here as it's computed in animateSplit
+                });
             }
         }
 
@@ -1172,7 +1428,7 @@
         });
 
         // 4. Traits Particles Physics
-        const traitsArea = document.getElementById('traits-area');
+        const traitsArea = document.getElementById('traits');
         const traitsList = [
             "Ambitieux", "Créatif", "Analytique", "Curieux", "Logique",
             "Collaboratif", "Stratégique", "Innovant", "Persévérant", "Communicatif"
@@ -1186,15 +1442,20 @@
             el.className = 'trait-particle';
             el.textContent = text;
             traitsArea.appendChild(el);
+
+            // Distributed Random Spawn - Ensure they are within bounds
+            const x = Math.random() * (window.innerWidth - 200);
+            const y = Math.random() * 200 + 50;
             particles.push({
                 el: el,
-                x: Math.random() * (traitsArea.offsetWidth - 200) + 10,
-                y: Math.random() * (traitsArea.offsetHeight - 50),
-                vx: (Math.random() - 0.5) * 1.5,
-                vy: (Math.random() - 0.5) * 1.5,
+                x: x,
+                y: y,
+                vx: (Math.random() - 0.5) * 2,
+                vy: (Math.random() - 0.5) * 2,
                 width: 0, height: 0,
                 isDragging: false
             });
+            el.style.transform = `translate(${x}px, ${y}px)`;
         });
 
         let draggedParticle = null;
@@ -1288,19 +1549,21 @@
                     if (p.y <= 0) { p.y = 0; p.vy *= -1; }
                     if (p.y + p.height >= areaRect.height) { p.y = areaRect.height - p.height; p.vy *= -1; }
 
+                    // Apply slight friction to movement
+                    p.vx *= 0.995;
+                    p.vy *= 0.995;
+
                     // Repel from mouse gently
-                    let isHoveringArea = (localMouseY >= areaRect.top && localMouseY <= areaRect.bottom);
-                    if (isHoveringArea && window.matchMedia("(pointer: fine)").matches) {
-                        let areaMouseY = localMouseY - areaRect.top;
-                        let centerX = p.x + p.width / 2;
-                        let centerY = p.y + p.height / 2;
-                        let dx = centerX - localMouseX;
-                        let dy = centerY - areaMouseY;
-                        let dist = Math.sqrt(dx * dx + dy * dy);
-                        if (dist < 150) {
-                            p.x += dx * 0.03;
-                            p.y += dy * 0.03;
-                        }
+                    let areaMouseY = localMouseY - areaRect.top;
+                    let centerX = p.x + p.width / 2;
+                    let centerY = p.y + p.height / 2;
+                    let dx = centerX - localMouseX;
+                    let dy = centerY - areaMouseY;
+                    let dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 200) {
+                        p.vx += dx * 0.001;
+                        p.vy += dy * 0.001;
                     }
                 }
 
@@ -1308,8 +1571,155 @@
             });
             requestAnimationFrame(updatePhysics);
         }
-        // Start physics once fonts are likely loaded so width is calculated correctly
-        setTimeout(updatePhysics, 500);
+
+        // Spread words on load to avoid overlap
+        window.addEventListener('load', () => {
+            particles.forEach(p => {
+                p.x = Math.random() * (traitsArea.offsetWidth - p.el.offsetWidth);
+                p.y = Math.random() * (traitsArea.offsetHeight - p.el.offsetHeight);
+            });
+        });
+        // 5. Tools Constellation Map logic
+        const toolsMap = document.getElementById('tools-map');
+        const canvas = document.getElementById('tools-canvas');
+        const ctx = canvas.getContext('2d');
+        const toolList = [
+            { name: "HubSpot", logo: "hubspot", x: 50, y: 50, connections: [1, 3, 5, 7] },
+            { name: "WordPress", logo: "wordpress", x: 15, y: 70, connections: [2, 4, 6] },
+            { name: "HTML/CSS", logo: "html5", x: 35, y: 80, connections: [1, 5] },
+            { name: "SEO", logo: "google", x: 80, y: 60, connections: [0, 4, 6, 7] },
+            { name: "Analytics", logo: "googleanalytics", x: 75, y: 40, connections: [3, 0] },
+            { name: "Rédaction Web", logo: "quill", isCustomSVG: true, x: 40, y: 15, connections: [1, 2] },
+            { name: "Réseaux Sociaux", logo: "instagram", x: 85, y: 80, connections: [0, 3] },
+            { name: "Montage Vidéo", logo: "video-camera", isCustomSVG: true, x: 60, y: 85, connections: [3, 6] }
+        ];
+
+        // Quill icon SVG helper
+        const QUILL_SVG = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19 7-7 3 3-7 7-3-3z"></path><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="m2 2 5 5"></path><path d="m8.5 8.5 1 1"></path></svg>`;
+        const CAMERA_SVG = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>`;
+
+        let nodes = [];
+        let stars = [];
+        let mapMouseX = 0, mapMouseY = 0;
+
+        function initToolsMap() {
+            canvas.width = toolsMap.offsetWidth;
+            canvas.height = toolsMap.offsetHeight;
+
+            stars = [];
+            for (let i = 0; i < 100; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 2,
+                    opacity: Math.random()
+                });
+            }
+
+            nodes = [];
+            toolsMap.querySelectorAll('.tool-node').forEach(n => n.remove());
+
+            toolList.forEach((tool, i) => {
+                const node = document.createElement('div');
+                node.className = 'tool-node';
+                let logoContent = `<img src="https://cdn.simpleicons.org/${tool.logo}/e2dfd8" alt="${tool.name}">`;
+
+                if (tool.isCustomLogo && tool.logo) {
+                    const filter = tool.isMonochrome ? 'filter: brightness(0) invert(1);' : 'filter: none;';
+                    logoContent = `<img src="${tool.logo}" alt="${tool.name}" style="${filter}">`;
+                } else if (tool.isCustomSVG) {
+                    logoContent = tool.logo === 'quill' ? QUILL_SVG : CAMERA_SVG;
+                } else if (tool.logo) {
+                    logoContent = `<img src="https://cdn.simpleicons.org/${tool.logo}/e2dfd8" alt="${tool.name}">`;
+                } else {
+                    // Fallback for logo-less nodes: Show name clearly
+                    logoContent = `<span style="font-size: 0.8rem; font-weight: 800; color: var(--fg); opacity: 0.8;">${tool.name.split(' ')[0]}</span>`;
+                }
+
+                node.innerHTML = `
+                    ${logoContent}
+                    <div class="tool-label-bubble">${tool.name}</div>
+                `;
+
+                const x = (tool.x / 100) * canvas.width;
+                const y = (tool.y / 100) * canvas.height;
+
+                node.style.left = `${x}px`;
+                node.style.top = `${y}px`;
+                node.style.transform = `translate(-50%, -50%)`;
+
+                toolsMap.appendChild(node);
+                nodes.push({ el: node, x, y, connections: tool.connections, id: i });
+            });
+        }
+
+        function drawConnections() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw stars
+            stars.forEach(star => {
+                ctx.fillStyle = `rgba(226, 223, 216, ${star.opacity})`;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            ctx.lineWidth = 1;
+            nodes.forEach(node => {
+                node.connections.forEach(targetId => {
+                    const target = nodes[targetId];
+                    const dist = Math.hypot(mapMouseX - node.x, mapMouseY - node.y);
+                    const proximity = Math.max(0, 1 - dist / 300);
+
+                    ctx.beginPath();
+                    ctx.moveTo(node.x, node.y);
+                    ctx.lineTo(target.x, target.y);
+
+                    const alpha = 0.05 + proximity * 0.3;
+                    ctx.strokeStyle = `rgba(0, 240, 255, ${alpha})`;
+                    ctx.stroke();
+                });
+            });
+            requestAnimationFrame(drawConnections);
+        }
+
+        toolsMap.addEventListener('mousemove', (e) => {
+            const rect = toolsMap.getBoundingClientRect();
+            mapMouseX = e.clientX - rect.left;
+            mapMouseY = e.clientY - rect.top;
+        });
+
+
+        // 7. ScrollSpy logic
+        const sections = document.querySelectorAll('div[id], section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = "";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        window.addEventListener('load', () => {
+            initToolsMap();
+            drawConnections();
+            updatePhysics();
+        });
+        window.addEventListener('resize', () => {
+            initToolsMap(); // Re-init correctly on resize
+        });
 
     </script>
 </body>
