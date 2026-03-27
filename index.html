@@ -467,14 +467,20 @@
             transform: translateX(0);
         }
 
-        /* TRAITS PHYSICS SECTION */
         .traits-section {
             position: relative;
-            height: 40vh;
+            height: clamp(40vh, 50vh, 60vh); /* More responsive height */
             border-top: 1px dashed rgba(226, 223, 216, 0.3);
             border-bottom: 1px dashed rgba(226, 223, 216, 0.3);
             overflow: hidden;
             margin: 4vh 0;
+        }
+
+        @media (max-width: 768px) {
+            .traits-section {
+                height: 60vh; /* Much more room on mobile to prevent extreme clustering */
+                margin: 2vh 0;
+            }
         }
 
         .traits-overlay {
@@ -494,10 +500,12 @@
         .trait-particle {
             position: absolute;
             font-family: var(--font-heading);
-            font-size: clamp(1.5rem, 3vw, 3rem);
+            font-size: clamp(2rem, 5vw, 4rem); /* Slightly larger for impact and readability */
             text-transform: uppercase;
             color: transparent;
-            -webkit-text-stroke: 1px var(--fg);
+            -webkit-text-stroke: 1.5px var(--fg);
+            /* Add text-shadow so overlapping transparent strokes are still readable */
+            text-shadow: 0 0 15px rgba(0, 0, 0, 0.8), 2px 2px 5px rgba(8, 8, 8, 0.9);
             white-space: nowrap;
             user-select: none;
             cursor: grab;
@@ -686,15 +694,16 @@
         @media (max-width: 768px) {
             .sticky-nav {
                 top: 1rem;
-                padding: 0.6rem 1.5rem;
-                gap: 1.2rem;
-                width: 90%;
+                padding: 0.6rem 1.2rem;
+                gap: 0.8rem;
+                width: 92%;
                 justify-content: center;
             }
 
             .nav-link {
-                font-size: 0.7rem;
+                font-size: 0.65rem;
                 letter-spacing: 1px;
+                white-space: nowrap;
             }
         }
 
@@ -762,7 +771,7 @@
             filter: brightness(1) contrast(1);
         }
 
-        .tool-label-bubble {
+        .tool-node .tool-label-bubble {
             position: absolute;
             bottom: -45px;
             left: 50%;
@@ -782,6 +791,17 @@
 
         .tool-node:hover .tool-label-bubble {
             opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Support for labels on top (for bottom-placed nodes) */
+        .tool-node.label-top .tool-label-bubble {
+            bottom: auto;
+            top: -45px;
+            transform: translateX(-50%) translateY(-10px);
+        }
+
+        .tool-node.label-top:hover .tool-label-bubble {
             transform: translateX(-50%) translateY(0);
         }
 
@@ -1096,8 +1116,8 @@
     <nav class="sticky-nav">
         <a href="#about" class="nav-link">À propos</a>
         <a href="#traits" class="nav-link">Skills</a>
-        <a href="#experience" class="nav-link">Expériences</a>
         <a href="#tools" class="nav-link">Outils</a>
+        <a href="#experience" class="nav-link">Expériences</a>
         <a href="#formation" class="nav-link">Formation</a>
     </nav>
 
@@ -1153,8 +1173,8 @@
                 entreprise afin de
                 contribuer activement à son <span class="highlight">développement</span> et à sa <span
                     class="highlight">performance</span>. <br><br>
-                En dehors du cadre professionnel, le <span class="highlight">basketball</span> et les <span class="highlight">jeux de stratégie</span> ont façonné ma <span class="highlight">rigueur</span>, 
-                mon <span class="highlight">esprit d'équipe</span> et ma <span class="highlight">logique</span> — des qualités que je mobilise naturellement dans mes projets en marketing digital et communication.
+                Le <span class="highlight">basketball</span> m'a enseigné la cohésion et le dépassement. Les <span
+                    class="highlight">jeux de stratégie en ligne</span> forgent mon esprit d'analyse et ma logique.
             </div>
             <div class="contact-details">
                 <a href="mailto:vorniere.paul@gmail.com" class="contact-item">
@@ -1482,6 +1502,7 @@
         });
         document.addEventListener('mouseup', () => {
             if (draggedParticle) {
+                draggedParticle.el.style.zIndex = '';
                 draggedParticle.isDragging = false;
                 draggedParticle = null;
             }
@@ -1504,6 +1525,7 @@
         }, { passive: false });
         document.addEventListener('touchend', () => {
             if (draggedParticle) {
+                draggedParticle.el.style.zIndex = '';
                 draggedParticle.isDragging = false;
                 draggedParticle = null;
             }
@@ -1516,6 +1538,7 @@
                 let clientY = e.clientY || (e.touches && e.touches[0].clientY);
                 areaRect = traitsArea.getBoundingClientRect();
                 p.isDragging = true;
+                p.el.style.zIndex = 100;
                 draggedParticle = p;
                 dragOffsetX = clientX - areaRect.left - p.x;
                 dragOffsetY = clientY - areaRect.top - p.y;
@@ -1549,22 +1572,10 @@
                     if (p.y <= 0) { p.y = 0; p.vy *= -1; }
                     if (p.y + p.height >= areaRect.height) { p.y = areaRect.height - p.height; p.vy *= -1; }
 
-                    // Apply slight friction to movement
-                    p.vx *= 0.995;
-                    p.vy *= 0.995;
+                    // Apply very slight friction to allow slow continuous drift
+                    p.vx *= 0.99;
+                    p.vy *= 0.99;
 
-                    // Repel from mouse gently
-                    let areaMouseY = localMouseY - areaRect.top;
-                    let centerX = p.x + p.width / 2;
-                    let centerY = p.y + p.height / 2;
-                    let dx = centerX - localMouseX;
-                    let dy = centerY - areaMouseY;
-                    let dist = Math.sqrt(dx * dx + dy * dy);
-
-                    if (dist < 200) {
-                        p.vx += dx * 0.001;
-                        p.vy += dy * 0.001;
-                    }
                 }
 
                 p.el.style.transform = `translate(${p.x}px, ${p.y}px)`;
@@ -1572,13 +1583,34 @@
             requestAnimationFrame(updatePhysics);
         }
 
-        // Spread words on load to avoid overlap
-        window.addEventListener('load', () => {
+        // Initialization with natural overlap and slight movement
+        function initTraitsPosition() {
+            const width = traitsArea.offsetWidth;
+            const height = traitsArea.offsetHeight;
+            if (width < 50 || height < 50) return;
+
             particles.forEach(p => {
-                p.x = Math.random() * (traitsArea.offsetWidth - p.el.offsetWidth);
-                p.y = Math.random() * (traitsArea.offsetHeight - p.el.offsetHeight);
+                p.width = p.el.offsetWidth || 100;
+                p.height = p.el.offsetHeight || 30;
+                p.x = Math.random() * (width - p.width);
+                p.y = Math.random() * (height - p.height);
+                // Give a gentle random velocity for slow natural drift
+                p.vx = (Math.random() - 0.5) * 1.5;
+                p.vy = (Math.random() - 0.5) * 1.5;
             });
+            // Removed pre-settle loop to avoid bugs on responsive (small screens)
+        }
+
+        // Use ResizeObserver for reliable dimension-based init
+        const traitsObserver = new ResizeObserver(entries => {
+            for (let entry of entries) {
+                if (entry.contentRect.width > 0) {
+                    initTraitsPosition();
+                    traitsObserver.unobserve(traitsArea); // Only init once per load
+                }
+            }
         });
+        traitsObserver.observe(traitsArea);
         // 5. Tools Constellation Map logic
         const toolsMap = document.getElementById('tools-map');
         const canvas = document.getElementById('tools-canvas');
@@ -1603,6 +1635,7 @@
         let mapMouseX = 0, mapMouseY = 0;
 
         function initToolsMap() {
+            if (!toolsMap.offsetWidth || !toolsMap.offsetHeight) return;
             canvas.width = toolsMap.offsetWidth;
             canvas.height = toolsMap.offsetHeight;
 
@@ -1644,6 +1677,11 @@
                 const x = (tool.x / 100) * canvas.width;
                 const y = (tool.y / 100) * canvas.height;
 
+                // Apply top label class for specific tools on mobile/small screens
+                if ([2, 6, 7].includes(i)) {
+                    node.classList.add('label-top');
+                }
+
                 node.style.left = `${x}px`;
                 node.style.top = `${y}px`;
                 node.style.transform = `translate(-50%, -50%)`;
@@ -1652,6 +1690,17 @@
                 nodes.push({ el: node, x, y, connections: tool.connections, id: i });
             });
         }
+
+        // Robust initialization for Tools Map
+        const toolsObserver = new ResizeObserver(entries => {
+            for (let entry of entries) {
+                if (entry.contentRect.width > 0) {
+                    initToolsMap();
+                    // Don't unobserve here because canvas needs resizing on window resize
+                }
+            }
+        });
+        toolsObserver.observe(toolsMap);
 
         function drawConnections() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -1713,12 +1762,9 @@
         });
 
         window.addEventListener('load', () => {
-            initToolsMap();
+            // Observer handles initial init if width > 0
             drawConnections();
             updatePhysics();
-        });
-        window.addEventListener('resize', () => {
-            initToolsMap(); // Re-init correctly on resize
         });
 
     </script>
