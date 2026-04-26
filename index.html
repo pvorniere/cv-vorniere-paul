@@ -1113,12 +1113,15 @@
 
 <body>
 
-    <nav class="sticky-nav">
-        <a href="#about" class="nav-link">À propos</a>
-        <a href="#traits" class="nav-link">Skills</a>
-        <a href="#tools" class="nav-link">Outils</a>
-        <a href="#experience" class="nav-link">Expériences</a>
-        <a href="#formation" class="nav-link">Formation</a>
+        <nav class="sticky-nav">
+        <a href="#about" class="nav-link" data-i18n="nav_about">À propos</a>
+        <a href="#traits" class="nav-link" data-i18n="nav_skills">Skills</a>
+        <a href="#tools" class="nav-link" data-i18n="nav_tools">Outils</a>
+        <a href="#experience" class="nav-link" data-i18n="nav_exp">Expériences</a>
+        <a href="#formation" class="nav-link" data-i18n="nav_edu">Formation</a>
+        <div style="width: 1px; background: rgba(226, 223, 216, 0.2); margin: 0 0.5rem;"></div>
+        <a class="nav-link lang-btn active" data-lang="fr" style="cursor:pointer;" onclick="setLanguage('fr')">FR</a>
+        <a class="nav-link lang-btn" data-lang="en" style="cursor:pointer;" onclick="setLanguage('en')">EN</a>
     </nav>
 
     <div class="cursor-dot"></div>
@@ -1134,7 +1137,7 @@
             <div class="split-layer top">PAUL<br>VORNIERE</div>
 
             <div class="core-reveal">
-                <div class="core-marquee">
+                <div class="core-marquee" data-i18n="hero_marquee">
                     <span>MANAGER MARKETING</span>
                     <span>•</span>
                     <span>COMMUNICATION</span>
@@ -1152,10 +1155,10 @@
         </div>
 
         <div class="hero-meta">
-            <div>Manager Marketing Digital & Communication</div>
+            <div data-i18n="hero_sub">Manager Marketing Digital & Communication</div>
             <div class="availability">
                 <span class="pulse-dot"></span>
-                Disponible
+                <span data-i18n="hero_avail">Disponible</span>
             </div>
         </div>
     </section>
@@ -1166,15 +1169,15 @@
             <div class="about-photo-wrap">
                 <img src="paul.jpg" alt="Paul Vornière" />
             </div>
-            <div class="about-text">
-                Je m’appelle <span class="highlight">Paul Vornière</span>, j’ai 24 ans et je souhaite mettre mes
+            <div class="about-text" data-i18n="about_text">
+                <div data-i18n="about_text">Je m’appelle <span class="highlight">Paul Vornière</span>, j’ai 24 ans et je souhaite mettre mes
                 compétences en <span class="highlight">marketing digital</span>, <span
                     class="highlight">communication</span> et <span class="highlight">analyse </span> au service d’une
                 entreprise afin de
                 contribuer activement à son <span class="highlight">développement</span> et à sa <span
                     class="highlight">performance</span>. <br><br>
                 Le <span class="highlight">basketball</span> m'a enseigné la cohésion et le dépassement. Les <span
-                    class="highlight">jeux de stratégie en ligne</span> forgent mon esprit d'analyse et ma logique.
+                    class="highlight">jeux de stratégie en ligne</span> forgent mon esprit d'analyse et ma logique.</div>
             </div>
             <div class="contact-details">
                 <a href="mailto:vorniere.paul@gmail.com" class="contact-item">
@@ -1215,7 +1218,7 @@
     <!-- EXPERIENCES -->
     <div class="container" id="experience">
         <section class="experiences">
-            <h2 class="section-title reveal-up">Expériences</h2>
+            <h2 class="section-title reveal-up" data-i18n="exp_title">Expériences</h2>
 
             <div class="job-card reveal-up">
                 <div class="job-meta">
@@ -1229,12 +1232,12 @@
                             <polyline points="16 7 22 7 22 13"></polyline>
                         </svg>
                     </div>
-                    <h3>Assistant Marketing Digital</h3>
-                    <h4>Leblanc Illuminations — Le Mans (72)</h4>
-                    <div class="date">Sept 2024 – Sept 2026</div>
+                    <h3 data-i18n="job1_title">Assistant Marketing Digital</h3>
+                    <h4 data-i18n="job1_company">Leblanc Illuminations — Le Mans (72)</h4>
+                    <div class="date" data-i18n="job1_date">Sept 2024 – Sept 2026</div>
                 </div>
                 <div class="job-desc">
-                    <ul>
+                    <ul data-i18n="job1_desc">
                         <li>Élaboration et déploiement de stratégies marketing digitales multicanales</li>
                         <li>Rédaction SEO : articles blog, newsletters, fiches produits, maillage interne</li>
                         <li>Création de workflows d'automatisation marketing sur HubSpot</li>
@@ -1259,12 +1262,12 @@
                             <line x1="8" y1="22" x2="16" y2="22"></line>
                         </svg>
                     </div>
-                    <h3>Chargé de Communication</h3>
+                    <h3 data-i18n="job2_title">Chargé de Communication</h3>
                     <h4>IAE Caen — Caen (14)</h4>
-                    <div class="date">Mars 2024 – Juin 2024</div>
+                    <div class="date" data-i18n="job2_date">Mars 2024 – Juin 2024</div>
                 </div>
                 <div class="job-desc">
-                    <ul>
+                    <ul data-i18n="job2_desc">
                         <li>Animation éditoriale et modération (Facebook, LinkedIn, Instagram, Twitter)</li>
                         <li>Logistique événementielle : coordination et gestion de 4 remises de diplômes</li>
                         <li>Captation et montage vidéo multi-formats (conférence anglaise avec sous-titres)</li>
@@ -1287,12 +1290,12 @@
                             <line x1="10" y1="18" x2="18" y2="18"></line>
                         </svg>
                     </div>
-                    <h3>Technicien Maintenance Informatique</h3>
+                    <h3 data-i18n="job3_title">Technicien Maintenance Informatique</h3>
                     <h4>Association Sainte-Angèle — Caen (14)</h4>
-                    <div class="date">Août 2022 – Août 2023</div>
+                    <div class="date" data-i18n="job3_date">Août 2022 – Août 2023</div>
                 </div>
                 <div class="job-desc">
-                    <ul>
+                    <ul data-i18n="job3_desc">
                         <li>Ticketing, résolution d'incidents, diagnostic, priorisation et escalade</li>
                         <li>Déploiement et configuration complète de salles informatiques</li>
                         <li>Gestion d'utilisateurs via Active Directory</li>
@@ -1307,7 +1310,7 @@
     <!-- TOOLS SECTION REDESIGN -->
     <div class="container" id="tools">
         <section class="tools reveal-up">
-            <h2 class="section-title">Outils & Savoir-faire</h2>
+            <h2 class="section-title" data-i18n="tools_title">Outils & Savoir-faire</h2>
             <div class="tools-map-container" id="tools-map">
                 <canvas id="tools-canvas"></canvas>
                 <!-- Nodes populated by JS -->
@@ -1319,32 +1322,32 @@
     <!-- FORMATION -->
     <div class="container" id="formation">
         <section class="formation reveal-up">
-            <h2 class="section-title">Formation</h2>
+            <h2 class="section-title" data-i18n="edu_title">Formation</h2>
             <div class="timeline">
                 <div class="timeline-item reveal-up">
                     <div class="date">2024–2026</div>
-                    <h3>Mastère Manager Marketing Digital & Communication</h3>
-                    <p>Obtenu</p>
+                    <h3 data-i18n="edu1_title">Mastère Manager Marketing Digital & Communication</h3>
+                    <p data-i18n="edu_grad1">Obtenu</p>
                 </div>
                 <div class="timeline-item reveal-up">
                     <div class="date">2023–2024</div>
-                    <h3>Licence E-Commerce & Marketing Numérique</h3>
-                    <p>Obtenue</p>
+                    <h3 data-i18n="edu2_title">Licence E-Commerce & Marketing Numérique</h3>
+                    <p data-i18n="edu_grad2">Obtenue</p>
                 </div>
                 <div class="timeline-item reveal-up">
                     <div class="date">2022–2023</div>
-                    <h3>Licence Générale Cybersécurité</h3>
-                    <p>Obtenue</p>
+                    <h3 data-i18n="edu3_title">Licence Générale Cybersécurité</h3>
+                    <p data-i18n="edu_grad2">Obtenue</p>
                 </div>
                 <div class="timeline-item reveal-up">
                     <div class="date">2020–2022</div>
-                    <h3>BTS SIO</h3>
-                    <p>Option SISR (Services Informatiques aux Organisations)</p>
+                    <h3 data-i18n="edu4_title">BTS SIO</h3>
+                    <p data-i18n="edu4_desc">Option SISR (Services Informatiques aux Organisations)</p>
                 </div>
                 <div class="timeline-item reveal-up">
                     <div class="date">2018–2019</div>
-                    <h3>Baccalauréat STMG</h3>
-                    <p>Option SIG</p>
+                    <h3 data-i18n="edu5_title">Baccalauréat STMG</h3>
+                    <p data-i18n="edu5_desc">Option SIG</p>
                 </div>
             </div>
         </section>
@@ -1767,6 +1770,205 @@
             updatePhysics();
         });
 
+    </script>
+
+    <script>
+    const translations = {
+        fr: {
+            nav_about: "À propos",
+            nav_skills: "Skills",
+            nav_tools: "Outils",
+            nav_exp: "Expériences",
+            nav_edu: "Formation",
+            hero_marquee: `
+                    <span>MANAGER MARKETING</span>
+                    <span>•</span>
+                    <span>COMMUNICATION</span>
+                    <span>•</span>
+                    <span>STRATÉGIE DIGITALE</span>
+                    <span>•</span>
+                    <span>MANAGER MARKETING</span>
+                    <span>•</span>
+                    <span>COMMUNICATION</span>
+                    <span>•</span>
+            `,
+            hero_sub: "Manager Marketing Digital & Communication",
+            hero_avail: "Disponible",
+            about_text: `Je m’appelle <span class="highlight">Paul Vornière</span>, j’ai 24 ans et je souhaite mettre mes
+                compétences en <span class="highlight">marketing digital</span>, <span
+                    class="highlight">communication</span> et <span class="highlight">analyse </span> au service d’une
+                entreprise afin de
+                contribuer activement à son <span class="highlight">développement</span> et à sa <span
+                    class="highlight">performance</span>. <br><br>
+                Le <span class="highlight">basketball</span> m'a enseigné la cohésion et le dépassement. Les <span
+                    class="highlight">jeux de stratégie en ligne</span> forgent mon esprit d'analyse et ma logique.`,
+            exp_title: "Expériences",
+            job1_title: "Assistant Marketing Digital",
+            job1_company: "Leblanc Illuminations — Le Mans (72)",
+            job1_date: "Sept 2024 – Sept 2026",
+            job1_desc: `
+                        <li>Élaboration et déploiement de stratégies marketing digitales multicanales</li>
+                        <li>Rédaction SEO : articles blog, newsletters, fiches produits, maillage interne</li>
+                        <li>Création de workflows d'automatisation marketing sur HubSpot</li>
+                        <li>Création d'un nouveau site web et refonte d'un site existant (<a
+                                href="https://www.haltolighting.com" target="_blank"
+                                style="color: var(--accent2); text-decoration: underline; cursor: none;">HubSpot CMS
+                                ↗</a>)</li>
+                        <li>Analyse de performances : conversions, trafic web via Google Analytics et reporting</li>
+                        <li>Conception de brochures digitales et veille sectorielle</li>
+            `,
+            job2_title: "Chargé de Communication",
+            job2_date: "Mars 2024 – Juin 2024",
+            job2_desc: `
+                        <li>Animation éditoriale et modération (Facebook, LinkedIn, Instagram, Twitter)</li>
+                        <li>Logistique événementielle : coordination et gestion de 4 remises de diplômes</li>
+                        <li>Captation et montage vidéo multi-formats (conférence anglaise avec sous-titres)</li>
+                        <li>Rédaction d'articles SEO pour le site institutionnel de l'école</li>
+                        <li>Suivi des performances Analytics pour orienter la stratégie de contenu</li>
+            `,
+            job3_title: "Technicien Maintenance Informatique",
+            job3_date: "Août 2022 – Août 2023",
+            job3_desc: `
+                        <li>Ticketing, résolution d'incidents, diagnostic, priorisation et escalade</li>
+                        <li>Déploiement et configuration complète de salles informatiques</li>
+                        <li>Gestion d'utilisateurs via Active Directory</li>
+                        <li>Refonte complète de l'inventaire GLPI (migration, paramétrage, formation utilisateurs)</li>
+                        <li>Amélioration de la solution de déploiement automatisé des postes</li>
+            `,
+            tools_title: "Outils & Savoir-faire",
+            edu_title: "Formation",
+            edu1_title: "Mastère Manager Marketing Digital & Communication",
+            edu2_title: "Licence E-Commerce & Marketing Numérique",
+            edu3_title: "Licence Générale Cybersécurité",
+            edu4_title: "BTS SIO",
+            edu5_title: "Baccalauréat STMG",
+            edu_grad1: "Obtenu",
+            edu_grad2: "Obtenue",
+            edu4_desc: "Option SISR (Services Informatiques aux Organisations)",
+            edu5_desc: "Option SIG",
+            traits: ["Ambitieux", "Créatif", "Analytique", "Curieux", "Logique", "Collaboratif", "Stratégique", "Innovant", "Persévérant", "Communicatif"],
+            tools: ["HubSpot", "WordPress", "HTML/CSS", "SEO", "Analytics", "Rédaction Web", "Réseaux Sociaux", "Montage Vidéo"]
+        },
+        en: {
+            nav_about: "About",
+            nav_skills: "Skills",
+            nav_tools: "Tools",
+            nav_exp: "Experiences",
+            nav_edu: "Education",
+            hero_marquee: `
+                    <span>MARKETING MANAGER</span>
+                    <span>•</span>
+                    <span>COMMUNICATION</span>
+                    <span>•</span>
+                    <span>DIGITAL STRATEGY</span>
+                    <span>•</span>
+                    <span>MARKETING MANAGER</span>
+                    <span>•</span>
+                    <span>COMMUNICATION</span>
+                    <span>•</span>
+            `,
+            hero_sub: "Digital Marketing & Communication Manager",
+            hero_avail: "Available",
+            about_text: `My name is <span class="highlight">Paul Vornière</span>, I am 24 years old and I want to put my
+                skills in <span class="highlight">digital marketing</span>, <span
+                    class="highlight">communication</span> and <span class="highlight">analysis</span> at the service of a
+                company in order to
+                actively contribute to its <span class="highlight">development</span> and <span
+                    class="highlight">performance</span>. <br><br>
+                <span class="highlight">Basketball</span> taught me cohesion and surpassing oneself. <span
+                    class="highlight">Online strategy games</span> forge my analytical mind and my logic.`,
+            exp_title: "Experiences",
+            job1_title: "Digital Marketing Assistant",
+            job1_company: "Leblanc Illuminations — Le Mans (France)",
+            job1_date: "Sept 2024 – Sept 2026",
+            job1_desc: `
+                        <li>Development and deployment of multi-channel digital marketing strategies</li>
+                        <li>SEO Writing: blog articles, newsletters, product sheets, internal linking</li>
+                        <li>Creation of marketing automation workflows on HubSpot</li>
+                        <li>Creation of a new website and redesign of an existing one (<a
+                                href="https://www.haltolighting.com" target="_blank"
+                                style="color: var(--accent2); text-decoration: underline; cursor: none;">HubSpot CMS
+                                ↗</a>)</li>
+                        <li>Performance analysis: conversions, web traffic via Google Analytics and reporting</li>
+                        <li>Design of digital brochures and sectoral monitoring</li>
+            `,
+            job2_title: "Communication Officer",
+            job2_date: "March 2024 – June 2024",
+            job2_desc: `
+                        <li>Editorial animation and moderation (Facebook, LinkedIn, Instagram, Twitter)</li>
+                        <li>Event logistics: coordination and management of 4 graduation ceremonies</li>
+                        <li>Multi-format video recording and editing (English conference with subtitles)</li>
+                        <li>Writing SEO articles for the school's institutional website</li>
+                        <li>Monitoring Analytics performance to guide content strategy</li>
+            `,
+            job3_title: "IT Support Technician",
+            job3_date: "Aug 2022 – Aug 2023",
+            job3_desc: `
+                        <li>Ticketing, incident resolution, diagnosis, prioritization and escalation</li>
+                        <li>Deployment and complete configuration of computer rooms</li>
+                        <li>User management via Active Directory</li>
+                        <li>Complete redesign of the GLPI inventory (migration, parameterization, user training)</li>
+                        <li>Improvement of the automated workstation deployment solution</li>
+            `,
+            tools_title: "Tools & Expertise",
+            edu_title: "Education",
+            edu1_title: "Master's in Digital Marketing & Communication",
+            edu2_title: "Bachelor's in E-Commerce & Digital Marketing",
+            edu3_title: "Bachelor's in Cybersecurity",
+            edu4_title: "HND in IT Services",
+            edu5_title: "High School Diploma in Management & IT",
+            edu_grad1: "Graduated",
+            edu_grad2: "Graduated",
+            edu4_desc: "Option SISR (IT Services for Organizations)",
+            edu5_desc: "Option SIG",
+            traits: ["Ambitious", "Creative", "Analytical", "Curious", "Logical", "Collaborative", "Strategic", "Innovative", "Persevering", "Communicative"],
+            tools: ["HubSpot", "WordPress", "HTML/CSS", "SEO", "Analytics", "Web Writing", "Social Media", "Video Editing"]
+        }
+    };
+
+    function setLanguage(lang) {
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[lang][key]) {
+                el.innerHTML = translations[lang][key];
+            }
+        });
+        
+        // Handle Traits list update
+        const particles = document.querySelectorAll('.trait-particle');
+        if (particles.length > 0 && translations[lang].traits) {
+            particles.forEach((p, idx) => {
+                if (translations[lang].traits[idx]) {
+                    p.textContent = translations[lang].traits[idx];
+                }
+            });
+        }
+        
+        // Handle Tools map update
+        if (typeof toolList !== 'undefined' && translations[lang].tools) {
+            toolList.forEach((tool, idx) => {
+                if (translations[lang].tools[idx]) {
+                    tool.name = translations[lang].tools[idx];
+                }
+            });
+            if (typeof initToolsMap === 'function') {
+                initToolsMap();
+            }
+        }
+        
+        // Update nav active state
+        document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelector('.lang-btn[data-lang="' + lang + '"]').classList.add('active');
+        
+        document.documentElement.lang = lang;
+        localStorage.setItem('cv_lang', lang);
+    }
+    
+    // Init language based on saved preference or default to fr
+    const savedLang = localStorage.getItem('cv_lang') || 'fr';
+    if(savedLang === 'en') {
+        setLanguage('en');
+    }
     </script>
 </body>
 
